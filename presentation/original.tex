@@ -1,0 +1,599 @@
+\documentclass[aspectratio=169,10pt]{ctexbeamer}
+
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,calc,shapes.geometric}
+
+\IfFontExistsTF{Times New Roman}{\setmainfont{Times New Roman}}{}
+\IfFontExistsTF{Microsoft YaHei}{\setCJKmainfont{Microsoft YaHei}}{}
+
+\definecolor{XJTUBlue}{RGB}{0,67,125}
+\definecolor{DeepTeal}{RGB}{0,111,112}
+\definecolor{WarmRed}{RGB}{167,55,48}
+\definecolor{SoftBlue}{RGB}{232,241,248}
+\definecolor{SoftGray}{RGB}{245,246,248}
+\definecolor{TextGray}{RGB}{45,48,52}
+
+\usetheme{Boadilla}
+\usefonttheme{professionalfonts}
+\setbeamertemplate{navigation symbols}{}
+\setbeamercolor{normal text}{fg=TextGray,bg=white}
+\setbeamercolor{structure}{fg=XJTUBlue}
+\setbeamercolor{frametitle}{fg=white,bg=XJTUBlue}
+\setbeamercolor{title}{fg=white,bg=XJTUBlue}
+\setbeamercolor{block title}{fg=white,bg=XJTUBlue}
+\setbeamercolor{block body}{fg=TextGray,bg=SoftBlue}
+\setbeamercolor{alerted text}{fg=WarmRed}
+\setbeamertemplate{itemize item}{\color{XJTUBlue}$\blacktriangleright$}
+\setbeamertemplate{itemize subitem}{\color{DeepTeal}$\bullet$}
+\setlength{\parskip}{0.25em}
+
+\setbeamertemplate{footline}{
+  \leavevmode
+  \hbox{
+    \begin{beamercolorbox}[wd=.72\paperwidth,ht=2.6ex,dp=1ex,leftskip=1.4em]{author in head/foot}
+      数字服务贸易开放对数字服务出口的影响
+    \end{beamercolorbox}
+    \begin{beamercolorbox}[wd=.28\paperwidth,ht=2.6ex,dp=1ex,rightskip=1.4em plus1fil]{date in head/foot}
+      \hfill \insertframenumber/\inserttotalframenumber
+    \end{beamercolorbox}
+  }
+}
+
+\newcommand{\smallnote}[1]{\vspace{0.25em}{\scriptsize\color{gray}#1}}
+\newcommand{\coef}[1]{\textcolor{WarmRed}{\textbf{#1}}}
+
+\title[数字服务贸易开放与数字服务出口]{数字服务贸易开放对数字服务出口的影响}
+\subtitle{基于双重机器学习的因果推断分析}
+\author{王维佳 \quad 王增涛}
+\institute{西安交通大学 经济与金融学院}
+\date{2026年}
+
+\begin{document}
+
+{
+\setbeamercolor{background canvas}{bg=XJTUBlue}
+\begin{frame}[plain]
+  \vspace{1.1cm}
+  {\color{white}\LARGE\bfseries 数字服务贸易开放对数字服务出口的影响\par}
+  \vspace{0.45cm}
+  {\color{white}\large 基于双重机器学习的因果推断分析\par}
+  \vspace{1.1cm}
+  {\color{white}王维佳 \quad 王增涛\par}
+  {\color{white}西安交通大学 经济与金融学院\par}
+  \vfill
+  {\color{white!80}\small 学术汇报版 Beamer}
+\end{frame}
+}
+
+\begin{frame}{汇报主线}
+  \begin{columns}[T,totalwidth=\textwidth]
+    \begin{column}{0.28\textwidth}
+      \begin{block}{研究问题}
+        数字服务贸易监管越开放，是否会显著促进数字服务出口？
+      \end{block}
+    \end{column}
+    \begin{column}{0.28\textwidth}
+      \begin{block}{识别策略}
+        用 DML 控制高维协变量、非线性关系与模型设定偏误。
+      \end{block}
+    \end{column}
+    \begin{column}{0.36\textwidth}
+      \begin{block}{核心结论}
+        DSTOI 正向显著；CPTPP 通过制度协调与基础设施改善放大出口效应。
+      \end{block}
+    \end{column}
+  \end{columns}
+  \vspace{0.7em}
+  \begin{center}
+  \resizebox{0.92\textwidth}{!}{
+  \begin{tikzpicture}[node distance=1.25cm, every node/.style={font=\small}]
+    \node[draw=XJTUBlue, very thick, rounded corners=2pt, fill=SoftBlue, minimum width=2.35cm, minimum height=0.9cm] (a) {问题提出};
+    \node[draw=XJTUBlue, very thick, rounded corners=2pt, fill=SoftBlue, minimum width=2.35cm, minimum height=0.9cm, right=of a] (b) {理论机制};
+    \node[draw=XJTUBlue, very thick, rounded corners=2pt, fill=SoftBlue, minimum width=2.35cm, minimum height=0.9cm, right=of b] (c) {DML 识别};
+    \node[draw=XJTUBlue, very thick, rounded corners=2pt, fill=SoftBlue, minimum width=2.35cm, minimum height=0.9cm, right=of c] (d) {经验结果};
+    \draw[-{Latex[length=2mm]}, thick, XJTUBlue] (a) -- (b);
+    \draw[-{Latex[length=2mm]}, thick, XJTUBlue] (b) -- (c);
+    \draw[-{Latex[length=2mm]}, thick, XJTUBlue] (c) -- (d);
+  \end{tikzpicture}
+  }
+  \end{center}
+\end{frame}
+
+\begin{frame}{研究背景与问题}
+  \begin{columns}[T,totalwidth=\textwidth]
+    \begin{column}{0.55\textwidth}
+      \begin{itemize}
+        \item 数字服务贸易快速扩张，ICT 迭代压缩跨境交易成本，也重塑服务贸易分工。
+        \item 与扩张并行的是数字治理碎片化：数据本地化、跨境数据流限制、电子交易限制、知识产权保护等政策差异显著。
+        \item 既有研究对“开放是否必然促进出口”的结论并不一致，尤其缺少更清晰的因果识别。
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.38\textwidth}
+      \begin{block}{本文问题}
+        \centering
+        \large
+        数字服务贸易开放度提高，\\
+        是否会带来更高的\\
+        数字服务出口？
+      \end{block}
+      \vspace{0.4em}
+      \begin{block}{进一步追问}
+        CPTPP 是否通过制度协调和基础设施渠道强化这一效应？
+      \end{block}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{本文可能贡献}
+  \begin{columns}[T,totalwidth=\textwidth]
+    \begin{column}{0.32\textwidth}
+      \begin{block}{测度}
+        基于 OECD DSTRI 构建开放度逆指标 DSTOI，刻画各国数字服务贸易政策环境。
+      \end{block}
+    \end{column}
+    \begin{column}{0.32\textwidth}
+      \begin{block}{方法}
+        引入双重机器学习，缓解高维协变量、非线性关系和模型误设带来的估计偏误。
+      \end{block}
+    \end{column}
+    \begin{column}{0.32\textwidth}
+      \begin{block}{机制}
+        将 CPTPP 的制度协调与固定宽带等数字基础设施纳入同一解释链条。
+      \end{block}
+    \end{column}
+  \end{columns}
+  \vspace{0.8em}
+  \begin{center}
+    \Large \textcolor{XJTUBlue}{从“相关性”转向“因果效应”与“政策机制”。}
+  \end{center}
+\end{frame}
+
+\begin{frame}{理论机制与研究假说}
+  \begin{columns}[T,totalwidth=\textwidth]
+    \begin{column}{0.52\textwidth}
+      \begin{align*}
+        \tau_{ij}(\theta_j,I_{ij}) &=
+        \exp\{-\alpha\theta_j-\beta\theta_j^2-\delta I_{ij}\} \\
+        \ln X_{ij} &= \kappa_{ij}
+        + \eta_1\theta_j+\eta_2\theta_j^2+\eta_3 I_{ij}+\varepsilon_{ij}
+      \end{align*}
+      \small
+      监管限制被视为“数字关税等价物”：一方面提高可变贸易成本，另一方面抬高企业进入与合规成本。开放度提高会降低成本，制度协调进一步降低监管异质性。
+    \end{column}
+    \begin{column}{0.42\textwidth}
+      \begin{block}{H1}
+        提高数字服务贸易开放度会促进数字服务出口。
+      \end{block}
+      \begin{block}{H2}
+        加入 CPTPP 会降低贸易监管程度，从而提高开放水平。
+      \end{block}
+      \begin{block}{H3}
+        加入 CPTPP 会提高数字硬件基础设施建设水平。
+      \end{block}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{作用渠道}
+  \begin{center}
+  \begin{tikzpicture}[
+    node distance=1.15cm and 1.3cm,
+    box/.style={draw=XJTUBlue, very thick, rounded corners=2pt, fill=SoftBlue, align=center, minimum width=3.0cm, minimum height=0.9cm},
+    channel/.style={draw=DeepTeal, very thick, rounded corners=2pt, fill=SoftGray, align=center, minimum width=3.2cm, minimum height=0.8cm},
+    arr/.style={-{Latex[length=2mm]}, very thick, color=XJTUBlue}
+  ]
+    \node[box] (dstoi) {DSTOI 提高\\监管开放};
+    \node[channel, right=of dstoi] (cost) {交易成本下降\\进入成本下降};
+    \node[box, right=of cost] (export) {数字服务\\出口增加};
+    \node[box, below=of dstoi] (cptpp) {CPTPP\\制度协调};
+    \node[channel, below=of cost] (infra) {固定宽带等\\数字基础设施改善};
+    \draw[arr] (dstoi) -- (cost);
+    \draw[arr] (cost) -- (export);
+    \draw[arr] (cptpp) -- (dstoi);
+    \draw[arr] (cptpp) -- (infra);
+    \draw[arr] (infra) -- (export);
+  \end{tikzpicture}
+  \end{center}
+  \vspace{0.4em}
+  \begin{center}
+  \small
+  经验检验围绕三条链：DSTOI $\rightarrow$ 出口；CPTPP $\times$ DSTOI $\rightarrow$ 出口；CPTPP $\rightarrow$ 固定宽带。
+  \end{center}
+\end{frame}
+
+\begin{frame}{数据与变量}
+  \begin{columns}[T,totalwidth=\textwidth]
+    \begin{column}{0.48\textwidth}
+      \begin{block}{样本}
+        \begin{itemize}
+          \item 60 个国家或地区
+          \item 2017--2024 年跨国面板
+          \item 观测值：480
+          \item 固定效应：区域与时间
+        \end{itemize}
+      \end{block}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \begin{block}{核心变量}
+        \begin{tabularx}{\linewidth}{>{\bfseries}lX}
+          \toprule
+          类型 & 变量 \\
+          \midrule
+          被解释变量 & 数字服务出口额 $\ln Export$ \\
+          核心解释变量 & DSTOI，DSTRI 的逆向开放度指标 \\
+          政策变量 & CPTPP 生效状态及交互项 \\
+          控制变量 & GDP、出口依存度、ODI、固定宽带、专利等 \\
+          \bottomrule
+        \end{tabularx}
+      \end{block}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{描述性统计}
+  \begin{table}
+  \centering
+  \small
+  \begin{tabular}{lrrrrr}
+    \toprule
+    变量 & 观测值 & 均值 & 标准差 & 最小值 & 最大值 \\
+    \midrule
+    $\ln Export$ & 480 & 8.584 & 2.276 & 0.531 & 13.301 \\
+    DSTOI & 480 & 0.835 & 0.106 & 0.353 & 1.000 \\
+    $\ln GDP$ & 480 & 26.673 & 1.508 & 23.521 & 30.780 \\
+    Dep\_Export & 480 & 0.472 & 0.355 & 0.082 & 2.114 \\
+    ODI & 480 & 0.037 & 0.179 & -0.423 & 2.532 \\
+    Fixband & 480 & 0.250 & 0.127 & 0.009 & 0.488 \\
+    $\ln Patent$ & 480 & 0.227 & 0.620 & 0.000 & 3.622 \\
+    \bottomrule
+  \end{tabular}
+  \end{table}
+  \smallnote{资料来源：论文表1。}
+\end{frame}
+
+\begin{frame}{双重机器学习识别策略}
+  \begin{columns}[T,totalwidth=\textwidth]
+    \begin{column}{0.50\textwidth}
+      \begin{align*}
+        Y_{it} &= \theta D_{it}+g(X_{it})+\mu_i+\lambda_t+\varepsilon_{it} \\
+        D_{it} &= m(X_{it})+\mu_i+\lambda_t+v_{it}
+      \end{align*}
+      \small
+      其中 $Y_{it}$ 为数字服务出口，$D_{it}$ 为 DSTOI 或政策交互项，$X_{it}$ 为高维控制变量集合。
+    \end{column}
+    \begin{column}{0.45\textwidth}
+      \begin{block}{DML 的关键做法}
+        \begin{itemize}
+          \item 用机器学习估计干扰函数 $g(\cdot)$ 与 $m(\cdot)$；
+          \item 对 $Y$ 与 $D$ 分别残差化，保留无法由控制变量解释的部分；
+          \item 交叉拟合降低过拟合与正则化偏差；
+          \item 在残差空间估计政策处理效应 $\theta$。
+        \end{itemize}
+      \end{block}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{基准结果：DSTOI 显著促进数字服务出口}
+  \begin{columns}[T,totalwidth=\textwidth]
+    \begin{column}{0.50\textwidth}
+      \begin{tikzpicture}[x=0.82cm,y=0.85cm]
+        \draw[->, gray] (0,0) -- (5.4,0) node[right] {\scriptsize 系数};
+        \foreach \x in {0,1,2,3,4,5} {
+          \draw[gray!35] (\x,0.05) -- (\x,-0.05) node[below] {\scriptsize \x};
+        }
+        \foreach \name/\val/\y in {模型(1)/4.662/3,模型(2)/4.501/2,模型(3)/4.741/1} {
+          \node[left] at (0,\y) {\scriptsize \name};
+          \draw[fill=XJTUBlue, draw=XJTUBlue] (0,\y-0.22) rectangle (\val,\y+0.22);
+          \node[right] at (\val,\y) {\scriptsize \val***};
+        }
+      \end{tikzpicture}
+    \end{column}
+    \begin{column}{0.45\textwidth}
+      \begin{block}{解释}
+        三种设定下，DSTOI 系数均为正且在 1\% 水平显著。
+      \end{block}
+      \begin{itemize}
+        \item 模型(1)：仅加入核心解释变量；
+        \item 模型(2)：加入二次项以捕捉非线性；
+        \item 模型(3)：进一步加入 GDP、出口依存度等控制变量。
+      \end{itemize}
+      \smallnote{资料来源：论文表2。}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{CPTPP 制度协调效应}
+  \begin{columns}[T,totalwidth=\textwidth]
+    \begin{column}{0.47\textwidth}
+      \begin{table}
+      \centering
+      \small
+      \begin{tabular}{lccc}
+        \toprule
+        变量 & (1) & (2) & (3) \\
+        \midrule
+        CPTPP$\times$DSTOI & \coef{1.550***} & \coef{1.530***} & \coef{0.620*} \\
+        稳健标准误 & (0.283) & (0.285) & (0.256) \\
+        区域固定效应 & 是 & 是 & 是 \\
+        时间固定效应 & 是 & 是 & 是 \\
+        $N$ & 480 & 480 & 480 \\
+        \bottomrule
+      \end{tabular}
+      \end{table}
+      \smallnote{资料来源：论文表3。}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \begin{block}{结果含义}
+        CPTPP 与数字服务贸易开放度的交互项为正，说明高标准协定能够通过制度协调放大开放对出口的促进作用。
+      \end{block}
+      \begin{itemize}
+        \item 数字传输免关税、跨境数据流动和消费者保护规则降低合规成本；
+        \item 负面清单与可执行纪律减少任意性监管；
+        \item 控制变量加入后系数下降但方向不变，说明结论仍有韧性。
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{稳健性：样本调整与并行政策控制}
+  \begin{table}
+  \centering
+  \scriptsize
+  \begin{tabular}{lcccccc}
+    \toprule
+    & 剔除部分国家 & 调整区间 & 区域-时间FE & 控收入 & 控协议 & 同时控制 \\
+    \midrule
+    DSTOI & \coef{8.274***} & \coef{7.507***} & \coef{3.738**} & \coef{3.666**} & \coef{2.405*} & 0.823 \\
+    稳健标准误 & (0.601) & (0.678) & (1.316) & (1.334) & (1.277) & (1.363) \\
+    控制变量一次项 & 是 & 是 & 是 & 是 & 是 & 是 \\
+    控制变量二次项 & 是 & 是 & 是 & 是 & 是 & 是 \\
+    区域固定效应 & 是 & 是 & 是 & 是 & 是 & 是 \\
+    时间固定效应 & 是 & 是 & 是 & 是 & 是 & 是 \\
+    $N$ & 466 & 473 & 480 & 480 & 480 & 480 \\
+    \bottomrule
+  \end{tabular}
+  \end{table}
+  \vspace{0.3em}
+  \begin{block}{读法}
+    在大多数稳健性设定中，DSTOI 仍保持正向显著；同时控制收入水平与其他协定后显著性下降，提示并行政策环境会削弱单一政策冲击的识别强度。
+  \end{block}
+  \smallnote{资料来源：论文表4。}
+\end{frame}
+
+\begin{frame}{稳健性：更换机器学习模型}
+  \begin{columns}[T,totalwidth=\textwidth]
+    \begin{column}{0.55\textwidth}
+      \begin{tikzpicture}[x=0.62cm,y=0.72cm]
+        \draw[->, gray] (0,0) -- (9.1,0) node[right] {\scriptsize 系数};
+        \foreach \x in {0,2,4,6,8} {
+          \draw[gray!35] (\x,0.05) -- (\x,-0.05) node[below] {\scriptsize \x};
+        }
+        \foreach \name/\val/\sig/\y in {
+          Kfolds=3/7.979/***/5,
+          Kfolds=8/8.269/***/4,
+          LassoCV/6.597/**/3,
+          GradBoost/7.294/***/2,
+          Nnet/0.478//1} {
+          \node[left] at (0,\y) {\scriptsize \name};
+          \draw[fill=DeepTeal, draw=DeepTeal] (0,\y-0.20) rectangle (\val,\y+0.20);
+          \node[right] at (\val,\y) {\scriptsize \val\sig};
+        }
+      \end{tikzpicture}
+    \end{column}
+    \begin{column}{0.40\textwidth}
+      \begin{block}{主要信息}
+        改变样本分割比例和多数机器学习算法后，DSTOI 的系数仍显著为正。
+      \end{block}
+      \begin{itemize}
+        \item LassoCV 和 GradBoost 支持主结论；
+        \item Nnet 不显著，说明估计结果对算法结构存在一定敏感性；
+        \item 整体上，开放促进出口的方向稳定。
+      \end{itemize}
+      \smallnote{资料来源：论文表5。}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{非 CPTPP 样本中的开放效应}
+  \begin{columns}[T,totalwidth=\textwidth]
+    \begin{column}{0.48\textwidth}
+      \begin{table}
+      \centering
+      \small
+      \begin{tabular}{lccc}
+        \toprule
+        & (1) & (2) & (3) \\
+        \midrule
+        DSTOI & \coef{8.362***} & \coef{6.004***} & \coef{3.772***} \\
+        稳健标准误 & (0.654) & (0.877) & (0.754) \\
+        区域固定效应 & 是 & 是 & 是 \\
+        时间固定效应 & 是 & 是 & 是 \\
+        $N$ & 408 & 408 & 408 \\
+        \bottomrule
+      \end{tabular}
+      \end{table}
+    \end{column}
+    \begin{column}{0.46\textwidth}
+      \begin{block}{含义}
+        即使剔除 CPTPP 成员国，数字服务贸易开放度仍显著促进数字服务出口。
+      \end{block}
+      \begin{itemize}
+        \item 说明 H1 并不完全依赖 CPTPP 样本；
+        \item 也意味着一般性监管开放本身具有出口促进作用；
+        \item CPTPP 更像是强化机制，而不是唯一来源。
+      \end{itemize}
+      \smallnote{资料来源：论文表6。}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{机制检验：CPTPP 提升固定宽带订阅率}
+  \begin{columns}[T,totalwidth=\textwidth]
+    \begin{column}{0.46\textwidth}
+      \begin{table}
+      \centering
+      \scriptsize
+      \resizebox{\linewidth}{!}{
+      \begin{tabular}{lccc}
+        \toprule
+        Fixband & (1) & (2) & (3) \\
+        \midrule
+        CPTPP & \coef{0.057***} & \coef{0.058***} & \coef{0.055***} \\
+        稳健SE & (0.012) & (0.012) & (0.011) \\
+        区域FE & 是 & 是 & 是 \\
+        时间FE & 是 & 是 & 是 \\
+        $N$ & 480 & 480 & 480 \\
+        \bottomrule
+      \end{tabular}
+      }
+      \end{table}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \begin{block}{机制解释}
+        CPTPP 不仅降低数字服务贸易监管摩擦，也可能通过电信规则、市场准入与制度压力推动固定宽带等数字基础设施建设。
+      \end{block}
+      \begin{itemize}
+        \item 基础设施改善提升跨境数字服务的接收、处理和交付能力；
+        \item 这为“制度开放 $\rightarrow$ 基础设施改善 $\rightarrow$ 出口增长”提供机制证据；
+        \item H3 获得经验支持。
+      \end{itemize}
+      \smallnote{资料来源：论文表7。}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{数值模拟：非线性开放效应}
+  \begin{columns}[T,totalwidth=\textwidth]
+    \begin{column}{0.58\textwidth}
+      \includegraphics[width=\linewidth]{fig_simulation.png}
+    \end{column}
+    \begin{column}{0.38\textwidth}
+      \begin{block}{模拟结论}
+        随着数字服务贸易开放度提高，数字服务出口呈非线性上升。
+      \end{block}
+      \begin{itemize}
+        \item 非线性模型相对线性基准显示更强的边际变化；
+        \item 结果与 DML 对高维非线性关系的识别思路一致；
+        \item 为理论模型提供直观展示。
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{主要结论}
+  \begin{block}{结论一：开放度有出口促进作用}
+    DSTOI 在基准回归和多数稳健性检验中均显著为正，说明数字服务贸易监管开放程度提高能够促进数字服务出口。
+  \end{block}
+  \begin{block}{结论二：CPTPP 具有制度协调效应}
+    CPTPP$\times$DSTOI 为正，说明高标准贸易协定可通过减少监管异质性和合规成本强化开放效应。
+  \end{block}
+  \begin{block}{结论三：基础设施是重要传导渠道}
+    CPTPP 对固定宽带订阅率的影响显著为正，支持制度开放通过数字基础设施建设影响出口绩效。
+  \end{block}
+\end{frame}
+
+\begin{frame}{政策启示}
+  \begin{columns}[T,totalwidth=\textwidth]
+    \begin{column}{0.48\textwidth}
+      \begin{block}{面向规则}
+        \begin{itemize}
+          \item 加强数字贸易合作，协调双边监管政策；
+          \item 对接 CPTPP 等高标准数字贸易规则；
+          \item 在自贸区开展规则压力测试，形成制度创新示范。
+        \end{itemize}
+      \end{block}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \begin{block}{面向能力}
+        \begin{itemize}
+          \item 推动电子认证、电子签名和无纸化贸易；
+          \item 建设跨境支付结算与数字贸易单一窗口；
+          \item 强化关键数字基础设施和企业技术吸收能力。
+        \end{itemize}
+      \end{block}
+    \end{column}
+  \end{columns}
+  \vspace{0.5em}
+  \begin{center}
+    \large \textcolor{XJTUBlue}{制度开放需要与技术能力、基础设施和风险治理协同推进。}
+  \end{center}
+\end{frame}
+
+\begin{frame}{汇报结束}
+  \begin{center}
+    \vspace{1.2cm}
+    {\Huge\color{XJTUBlue}\bfseries 谢谢！}
+    \vspace{0.8cm}
+
+    {\large 欢迎批评指正}
+  \end{center}
+\end{frame}
+
+\appendix
+
+\begin{frame}{附录：变量说明}
+  \begin{table}
+  \centering
+  \small
+  \begin{tabularx}{\linewidth}{lX}
+    \toprule
+    变量 & 含义 \\
+    \midrule
+    $\ln Export$ & 数字服务贸易出口额的对数形式 \\
+    DSTOI & 数字服务贸易开放度，基于 OECD DSTRI 反向构造，数值越高表示限制越少 \\
+    CPTPP & CPTPP 生效状态，2018 年及之后设为 1，否则为 0 \\
+    Dep\_Export & 出口依存度，刻画经济体对外向型贸易的依赖程度 \\
+    ODI & 对外直接投资度，用于控制资本流动与技术溢出 \\
+    Fixband & 固定宽带订阅率，用于刻画数字硬件基础设施 \\
+    $\ln Patent$ & 专利申请数的对数形式，用于控制创新能力 \\
+    \bottomrule
+  \end{tabularx}
+  \end{table}
+\end{frame}
+
+\begin{frame}{附录：基准回归与 CPTPP 结果}
+  \begin{columns}[T,totalwidth=\textwidth]
+    \begin{column}{0.48\textwidth}
+      \begin{table}
+      \centering
+      \scriptsize
+      \begin{tabular}{lccc}
+        \toprule
+        & (1) & (2) & (3) \\
+        \midrule
+        DSTOI & 4.662*** & 4.501*** & 4.741*** \\
+        & (0.789) & (0.771) & (0.846) \\
+        常数项 & 0.018 & 0.016 & 0.016 \\
+        $N$ & 480 & 480 & 480 \\
+        \bottomrule
+      \end{tabular}
+      {\scriptsize 表2：DSTOI 对出口影响}
+      \end{table}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \begin{table}
+      \centering
+      \scriptsize
+      \begin{tabular}{lccc}
+        \toprule
+        & (1) & (2) & (3) \\
+        \midrule
+        CPTPP$\times$DSTOI & 1.550*** & 1.530*** & 0.620* \\
+        & (0.283) & (0.285) & (0.256) \\
+        常数项 & -0.045 & -0.050 & 0.007 \\
+        $N$ & 480 & 480 & 480 \\
+        \bottomrule
+      \end{tabular}
+      {\scriptsize 表3：CPTPP 交互效应}
+      \end{table}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\end{document}
