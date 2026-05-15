@@ -1,0 +1,8 @@
+# Unzipped data files (sources are tracked as .zip)
+数据2.dta
+数据3.dta
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
