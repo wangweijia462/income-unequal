@@ -48,6 +48,13 @@
   }
 }
 
+% --- Small logo in the upper-right corner of every content slide ---
+\addtobeamertemplate{frametitle}{}{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \node[anchor=north east, inner sep=4pt] at (current page.north east)
+      {\includegraphics[height=0.55cm]{xjtu_logo.png}};
+  \end{tikzpicture}}
+
 \newcommand{\smallnote}[1]{\vspace{0.25em}{\scriptsize\color{gray}#1}}
 \newcommand{\coef}[1]{\textcolor{WarmRed}{\textbf{#1}}}
 \newcommand{\hl}[1]{\textcolor{XJTUBlue}{\textbf{#1}}}
@@ -64,17 +71,24 @@
 {
 \setbeamercolor{background canvas}{bg=XJTUBlue}
 \begin{frame}[plain]
-  \vspace{0.8cm}
-  {\color{white}\LARGE\bfseries 数字服务贸易开放对数字服务出口的影响\par}
-  \vspace{0.35cm}
-  {\color{white!85}\large 基于双重机器学习的因果推断分析\par}
+  % --- Logo at top center of title page ---
+  \begin{tikzpicture}[remember picture,overlay]
+    \node[anchor=north, inner sep=0pt] at ($(current page.north)+(0,-1.0cm)$)
+      {\includegraphics[width=5.5cm]{xjtu_logo_white.png}};
+  \end{tikzpicture}
+  \vspace*{3.3cm}
+  \begin{center}
+    {\color{white}\LARGE\bfseries 数字服务贸易开放对数字服务出口的影响\par}
+    \vspace{0.4cm}
+    {\color{white!85}\large 基于双重机器学习的因果推断分析\par}
+  \end{center}
   \vspace{1.2cm}
   \begin{flushleft}
-    \hspace{1cm}{\color{white}\large\bfseries 汇报人：王维佳\par}
+    \hspace{1.4cm}{\color{white}\large\bfseries 汇报人：王维佳\par}
     \vspace{0.25cm}
-    \hspace{1cm}{\color{white!90} 合作作者：王增涛\par}
+    \hspace{1.4cm}{\color{white!90} 合作作者：王增涛\par}
     \vspace{0.5cm}
-    \hspace{1cm}{\color{white!90} 西安交通大学 \quad 经济与金融学院\par}
+    \hspace{1.4cm}{\color{white!90} 西安交通大学 \quad 经济与金融学院\par}
   \end{flushleft}
   \vfill
   \hfill {\color{white!80}\small 2026 年 \quad 学术汇报版}\hspace{1cm}\null
@@ -656,12 +670,16 @@
 {
 \setbeamercolor{background canvas}{bg=XJTUBlue}
 \begin{frame}[plain]
-  \vfill
+  \begin{tikzpicture}[remember picture,overlay]
+    \node[anchor=north, inner sep=0pt] at ($(current page.north)+(0,-1.0cm)$)
+      {\includegraphics[width=4.5cm]{xjtu_logo_white.png}};
+  \end{tikzpicture}
+  \vspace*{3.5cm}
   \begin{center}
     {\color{white}\Huge\bfseries 谢谢各位老师！\par}
-    \vspace{0.6cm}
+    \vspace{0.7cm}
     {\color{white!90}\Large 敬请批评指正\par}
-    \vspace{1.5cm}
+    \vspace{1.8cm}
     {\color{white!85}\large 王维佳\par}
     {\color{white!80}\normalsize 西安交通大学 经济与金融学院\par}
   \end{center}
