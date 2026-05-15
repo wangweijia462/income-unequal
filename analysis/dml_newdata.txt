@@ -1,0 +1,62 @@
+Loaded: N=480  countries=60  years=[np.int64(2014), np.int64(2015), np.int64(2016), np.int64(2017), np.int64(2018), np.int64(2019), np.int64(2020), np.int64(2021)]
+Treatment (cptpp_post) rate: 0.0750
+
+==============================================================================
+TABLE 2: DSTOI -> ln(export)
+         FE: country + year,  K=5 cross-fitted DML-PLR (RF)
+==============================================================================
+  (1) DSTOI only        theta=+1.6812***  se=0.4647  t=+3.62  p=0.0003  n=480
+  (2) DSTOI + DSTOI^2   theta=+9.0310*    se=5.3253  t=+1.70  p=0.0899  n=480
+  (3) Full controls     theta=+1.6913     se=1.2296  t=+1.38  p=0.1690  n=480
+  (4) Full + quadratics theta=+6.1977*    se=3.7301  t=+1.66  p=0.0966  n=480
+
+==============================================================================
+TABLE 3: CPTPP * Post-2018 (DiD treatment)
+==============================================================================
+  CPTPP -> lnexport, no ctrl    theta=+0.0779     se=0.0922  t=+0.85  p=0.3981  n=480
+  CPTPP -> lnexport, full ctrl  theta=+0.0264     se=0.0621  t=+0.43  p=0.6700  n=480
+  CPTPP -> DSTOI,    no ctrl    theta=+0.0361***  se=0.0088  t=+4.10  p=0.0000  n=480
+  CPTPP -> DSTOI,    full ctrl  theta=+0.0291***  se=0.0081  t=+3.60  p=0.0003  n=480
+
+==============================================================================
+TABLE 7: H3 mechanism - CPTPP -> fixed broadband (fixband_r)
+==============================================================================
+  CPTPP -> broadband, no ctrl   theta=-0.0003     se=0.0036  t=-0.09  p=0.9274  n=480
+  CPTPP -> broadband, ctrls     theta=+0.0006     se=0.0036  t=+0.16  p=0.8751  n=480
+
+==============================================================================
+TABLE 4: Robustness - sample restrictions
+==============================================================================
+  Drop USA/MEX             theta=+1.8179     se=1.2862  t=+1.41  p=0.1575  n=464
+  Window 2016-2020         theta=+2.9028*    se=1.7161  t=+1.69  p=0.0908  n=300
+  Non-CPTPP only           theta=+1.6681     se=1.3143  t=+1.27  p=0.2043  n=408
+
+==============================================================================
+TABLE 5: Robustness - alternative ML learners
+==============================================================================
+  LASSO  (DSTOI -> lnexport):  theta=+1.7562     se=1.2571  t=+1.40  p=0.1624  n=480
+  GB     (DSTOI -> lnexport):  theta=+1.0880     se=1.3046  t=+0.83  p=0.4043  n=480
+  NNET   (DSTOI -> lnexport):  theta=+1.2052***  se=0.3132  t=+3.85  p=0.0001  n=480
+  LASSO  (CPTPP -> lnexport):  theta=+0.0767     se=0.0502  t=+1.53  p=0.1265  n=480
+  GB     (CPTPP -> lnexport):  theta=-0.0440     se=0.0951  t=-0.46  p=0.6435  n=480
+  NNET   (CPTPP -> lnexport):  theta=+0.2452***  se=0.0550  t=+4.46  p=0.0000  n=480
+
+K-fold sensitivity (RF, DSTOI):
+  K=2   theta=+1.1211     se=1.1913  t=+0.94  p=0.3467  n=480
+  K=3   theta=+1.7407     se=1.2416  t=+1.40  p=0.1609  n=480
+  K=5   theta=+1.6913     se=1.2296  t=+1.38  p=0.1690  n=480
+  K=8   theta=+1.6914     se=1.2371  t=+1.37  p=0.1715  n=480
+  K=10  theta=+1.7548     se=1.2429  t=+1.41  p=0.1580  n=480
+
+==============================================================================
+Heterogeneity: by income group
+==============================================================================
+  High income                theta=-0.5330     se=0.4179  t=-1.28  p=0.2022  n=296
+  Upper middle income        theta=+4.1327***  se=1.5936  t=+2.59  p=0.0095  n=152
+
+Heterogeneity: by region
+  Europe                     theta=+1.7799**   se=0.7771  t=+2.29  p=0.0220  n=232
+  Americas                   theta=+0.6094     se=0.7736  t=+0.79  p=0.4308  n=104
+  Asia                       theta=+2.8813*    se=1.5228  t=+1.89  p=0.0585  n=120
+
+Saved 29 results to /home/user/income-unequal/analysis/dml_results_newdata.csv

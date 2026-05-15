@@ -1,0 +1,62 @@
+========================================================================
+OLS with two-way FE (country + year), cluster-robust SE by country
+========================================================================
+
+(1) lnexport ~ DSTOI
+  var     coef       se        t        p
+dstoi 1.681218 1.822495 0.922482 0.356277
+  N = 480
+
+(2) lnexport ~ DSTOI + DSTOI^2
+     var       coef       se         t        p
+   dstoi  20.393749 4.391964  4.643424 0.000003
+dstoi_sq -13.553518 3.178418 -4.264234 0.000020
+  N = 480
+
+(3) lnexport ~ DSTOI + 5 controls
+      var      coef       se         t        p
+    dstoi  1.811726 1.614473  1.122179 0.261787
+    lngdp  1.025806 0.275902  3.718011 0.000201
+exportd_r  0.844290 0.726878  1.161530 0.245426
+fdi_out_r -0.046935 0.027725 -1.692866 0.090481
+fixband_r  0.042233 1.993021  0.021190 0.983094
+ lnpatent  0.703118 0.454238  1.547905 0.121645
+  N = 480
+
+(4) lnexport ~ cptpp_post (DiD)
+       var     coef       se        t        p
+cptpp_post 0.077879 0.074406 1.046682 0.295246
+  N = 480
+
+(5) lnexport ~ cptpp_post + controls
+       var      coef       se         t        p
+cptpp_post  0.078856 0.073176  1.077626 0.281201
+     lngdp  1.008986 0.296699  3.400703 0.000672
+ exportd_r  0.906055 0.746397  1.213904 0.224784
+ fdi_out_r -0.047759 0.027968 -1.707629 0.087705
+ fixband_r  0.513423 2.460951  0.208628 0.834739
+  lnpatent  0.496180 0.498534  0.995278 0.319601
+  N = 480
+
+(6) DSTOI ~ cptpp_post
+       var     coef       se        t        p
+cptpp_post 0.036052 0.011753 3.067395 0.002159
+  N = 480
+
+(7) DSTOI ~ cptpp_post + lngdp
+       var      coef       se         t        p
+cptpp_post  0.036021 0.011568  3.113750 0.001847
+     lngdp -0.020398 0.042001 -0.485661 0.627207
+  N = 480
+
+(8) fixband_r ~ cptpp_post  (H3 mechanism)
+       var      coef     se         t        p
+cptpp_post -0.000331 0.0084 -0.039451 0.968531
+  N = 480
+
+(9) fixband_r ~ cptpp_post + lngdp + exportd_r
+       var      coef       se         t        p
+cptpp_post -0.000546 0.008098 -0.067455 0.946219
+     lngdp -0.007667 0.022233 -0.344850 0.730207
+ exportd_r  0.021992 0.047385  0.464127 0.642557
+  N = 480
