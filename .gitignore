@@ -1,6 +1,17 @@
 # Unzipped data files (sources are tracked as .zip)
 数据2.dta
 数据3.dta
+\#U6570\#U636e2.dta
+\#U6570\#U636e3.dta
+
+# LaTeX build artifacts
+*.aux
+*.log
+*.out
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz
 
 # Python
 __pycache__/

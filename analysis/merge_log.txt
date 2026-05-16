@@ -1,0 +1,50 @@
+Main: (480, 34), countries=60
+Coverage in data1 ISO3: 60 / 60
+Coverage in data2 ISO3: 60 / 60
+Coverage in data3 ISO3: 60 / 60
+Coverage in data4 ISO3: 60 / 60
+
+Merged data1: added 11 cols
+  productivity_d1: 32.3% non-null
+  AI_d1: 100.0% non-null
+  Tech_d1: 100.0% non-null
+  techindex_d1: 96.7% non-null
+  digit_d1: 91.7% non-null
+  articles_d1: 87.5% non-null
+  re_d1: 100.0% non-null
+  culture_d1: 100.0% non-null
+  inst_d1: 100.0% non-null
+  secure_d1: 87.5% non-null
+  fta_d1: 100.0% non-null
+
+Merged data2: added 7 cols
+  ebit_mean: 84.2% non-null
+  assets_mean: 86.0% non-null
+  liabilities_mean: 84.0% non-null
+  leverage_mean: 86.0% non-null
+  ma_success_rate: 91.9% non-null
+  ma_count: 91.9% non-null
+  lnma_count: 91.9% non-null
+
+Merged data3: added 6 cols
+  productivity_d3: 29.0% non-null
+  PerData_d3: 100.0% non-null
+  AI_d3: 100.0% non-null
+  Tech_d3: 100.0% non-null
+  techindex_d3: 96.7% non-null
+  digit_d3: 91.7% non-null
+
+Merged data4: added 2 cols
+  LWTariff: 90.0% non-null
+  dlny: 96.5% non-null
+Traceback (most recent call last):
+  File "/home/user/income-unequal/analysis/merge_data.py", line 108, in <module>
+    main()
+  File "/home/user/income-unequal/analysis/merge_data.py", line 100, in main
+    pyreadstat.write_dta(merged, out_path)
+  File "/usr/local/lib/python3.11/dist-packages/pyreadstat/pyreadstat.py", line 1333, in write_dta
+    writer_entry_point(
+  File "pyreadstat/_readstat_writer.pyx", line 1046, in pyreadstat._readstat_writer.writer_entry_point
+  File "pyreadstat/_readstat_writer.pyx", line 712, in pyreadstat._readstat_writer.run_write
+  File "pyreadstat/_readstat_writer.pyx", line 657, in pyreadstat._readstat_writer.initial_checks
+pyreadstat._readstat_parser.PyreadstatError: variable name '_est_model1' starts with an illegal (non-alphabetic) character: '_' (ordinal 95)
