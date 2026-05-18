@@ -1,21 +1,24 @@
 """
-v4 edit: regenerate paper_v3.docx by editing paper_v2.docx incrementally.
+v5 edit: regenerate paper_v3.docx by editing paper_v2.docx incrementally.
 
-Differences from previous attempt:
-  1. Drop all "为回应评审" wording — integrate naturally as continuation of
-     the surrounding section.
-  2. Distribute new content across the paper instead of dumping everything
-     after 4. 进一步分析:
-       - 扩展控制变量稳健性表 (表8)  插入 (二)主要结果 末尾，紧接表3 讨论之后；
-       - 多渠道机制 (表12) 与现有 4. 进一步分析 段合并；
-       - 行业/收入/初始开放度 异质性 (表9-11) 作为新 (四)异质性分析 章节，
-         放在 (三)稳健性检验 之后、五、研究结论 之前。
-  3. All inserted tables follow the original 三线表 (three-line) style:
-       - table-level borders all "none", centered horizontally
-       - cell-level borders only on row 0 (top sz=12, bottom sz=4)
-         and last row (bottom sz=12)
+Cumulative changes (relative to paper_v2.docx):
+  1. 段25 (贡献): 重写, 去除 DML 方法贡献的过度强调.
+  2. 段92 (控制变量): 段末追加 6 类扩展控制变量.
+  3. 段142 (4.进一步分析): 段内自然延伸, 增加多渠道机制分析.
+  4. (二)主要结果末尾插入 扩展控制变量表 (表8).
+  5. 4.进一步分析末尾插入 CPTPP多渠道机制表 (表12).
+  6. (三)稳健性检验后, 五、研究结论前 新增 (四)异质性分析 章节,
+     含 3 小节 + 表 9 / 表 10 / 表 11.
+  7. NEW: 段51-53 (仿真模拟): 替换为校准结果, 给出量化对照
+     (sim slope ≈ +3.17 vs DML θ̂≈2.95, 差距 < 1 SE).
+  8. NEW: 在 H1/H2/H3 之后追加理论—实证桥接段, 显式对应每项假设的实证证据.
+  9. NEW: 替换图1 的图像内容为 analysis/figure1_simulation.png
+     (校准后的 EK+Melitz 模拟三联图).
+  10. 表格统一三线表样式: 表级 borders=none + 居中,
+      首行 top sz=12 + bottom sz=4, 末行 bottom sz=12.
 """
 import copy
+import os
 from docx import Document
 from docx.oxml.ns import qn
 from docx.oxml import OxmlElement
@@ -202,6 +205,55 @@ TABLE_NOTE_STD = (
     "注: *、**、***分别表示在 10% 、5% 、1% 的水平上显著，括号内为稳健标准误。"
 )
 
+# ---- 仿真段落 (替换段51-53) ----
+
+NEW_SIM_PARA_51 = (
+    "为进一步检验理论模型的鲁棒性和实际政策含义，本文基于Eaton and Kortum (2002)结构模型的扩展框架，"
+    "使用Python软件进行数值模拟。模拟设定100个经济体，企业生产率服从Pareto分布(形状参数k=4.5)，"
+    "贸易弹性σ=3.5，监管成本敏感度α=0.22，CPTPP制度协调使监管成本下降κ=18%（与ECIPE合规成本18%—22%估计区间一致）。"
+    "在该参数化下，本文对开放度θ_j从0.30到0.95区间进行数值积分，模拟数字服务出口随开放度变化的非线性轨迹，"
+    "并与CPTPP生效情形进行对照。"
+)
+
+NEW_SIM_PARA_52 = (
+    "模拟逻辑源于以下考虑：首先，Eaton and Kortum (2002)模型擅长处理结构性异质（如产业优化和技术溢出对增长的贡献），"
+    "通过引力型框架捕捉要素配置效率，但传统线性假设忽略了数字服务贸易的非平稳性和高维数据。"
+    "为解决这类问题，本文扩展为非线性形式，引入监管成本函数，这借鉴了Melitz (2003)的异质企业框架，"
+    "该框架强调结构性转变筛选高生产率企业退出市场，提高全要素生产率（TFP），"
+    "符合文本中各类限制措施对数字服务贸易的非线性传导。同时，参考近期数字贸易扩展如Ferracane et al. (2024)，"
+    "将政策限制视为“数字关税”等价物，通过固定进入成本和制度协调体现多边协定（如“双循环”格局）减少壁垒的作用，"
+    "确保模型处理高维非线性异质性，与DML的正交化原理相呼应。"
+    "在不同行业代表性参数（如教育—技术 k=3.5、金融服务 k=6.0）下，分别考察生产率分布形态对开放红利的调节作用，"
+    "以便从理论侧解释后文行业异质性结果。"
+)
+
+NEW_SIM_PARA_53 = (
+    "模拟结果如图1所示。图1(A)显示，随开放度θ的提高，数字服务出口lnX呈非线性上升，"
+    "且曲线在θ≥0.85的高开放度区间趋于平缓，与本文第四节关于“初始开放度”维度的异质性结论"
+    "（“初始低开放度”经济体开放红利显著为正θ=3.122**，“初始高开放度”经济体开放红利反转为负θ=-2.673**）"
+    "在因果方向上相互印证。围绕样本均值θ̄≈0.83附近，模拟得到的边际斜率d(lnX)/dθ≈+3.17，"
+    "与表8中加入“数字化水平”后DML估计量θ̂=2.951（SE=1.200）相吻合，两者差距小于一个标准误，"
+    "表明本文理论模型对真实数据所揭示的因果效应给出了量化一致的预测。"
+    "图1(B)给出CPTPP制度协调引致的ΔlnX轨迹，处置效应在中等开放度区间最大，向高开放度区间收敛——"
+    "这与表12中“CPTPP→DSTOI”中介估计量0.029***以及间接传导贡献+0.049的实证结果方向一致；"
+    "图1(C)进一步呈现不同生产率分布（Pareto形状参数k）下的开放度—出口曲线，"
+    "“教育—技术”主导经济体（重尾分布，k=3.5）的开放红利最高，"
+    "“金融服务”主导经济体（轻尾分布，k=6.0）红利最弱，"
+    "与表10行业异质性结果（“教育—技术主导”θ=1.461**显著、“金融服务主导”θ=-0.377不显著）在结构上完全吻合。"
+    "综合而言，理论模拟与DML实证证据在符号、量级和异质性结构三个维度上交叉验证，"
+    "支持本文“制度型开放通过监管成本下降与企业筛选两条结构性渠道驱动数字服务出口”的核心论点。"
+)
+
+# 理论—实证桥接段（紧接 H3 之后插入）
+BRIDGE_THEORY_TO_EMPIRICS = (
+    "上述三个假设刻画了从“制度型开放→制度协调→出口”的完整因果链条，将依次在第四节实证部分得到检验："
+    "H1对应表2、表3的DSTOI主效应回归以及表8扩展控制变量稳健性结果；"
+    "H2对应表3 CPTPP×DSTOI交互项与表12“CPTPP→DSTOI”中介估计；"
+    "H3则对应表7 CPTPP对固定宽带订阅率的处置效应以及表12对AI能力、全要素生产率等多渠道中介变量的检验。"
+    "此外，行业、收入与初始开放度维度的异质性（表9—表11）将进一步从因果异质性视角对理论模型中的"
+    "非线性边际效应与企业筛选机制提供支撑，使理论推导与实证识别构成闭环。"
+)
+
 # ---------- helpers ----------
 
 def _make_border(kind, sz):
@@ -348,47 +400,86 @@ def _insert_block_before(anchor_elem, doc, blocks):
 
 # ---------- main ----------
 
+def _replace_image_in_paragraph(doc, paragraph, new_image_path):
+    """Replace the first embedded image in a paragraph with a new image.
+
+    We locate the rId of the existing <a:blip embed="..."/> and overwrite
+    the binary content of that ImagePart in the package, so the new image
+    inherits the existing inline sizing / layout properties.
+    """
+    blip_tag = '{http://schemas.openxmlformats.org/drawingml/2006/main}blip'
+    rel_attr = '{http://schemas.openxmlformats.org/officeDocument/2006/relationships}embed'
+    blips = paragraph._element.findall('.//' + blip_tag)
+    if not blips:
+        raise RuntimeError("no image found in paragraph")
+    rId = blips[0].get(rel_attr)
+    image_part = doc.part.related_parts[rId]
+    with open(new_image_path, 'rb') as f:
+        image_part._blob = f.read()
+
+
 def main():
     doc = Document(SRC)
 
+    # --- Cache anchor paragraphs by content BEFORE any structural change,
+    #     so subsequent insertions/shifts don't invalidate references. ---
+    def _find_para(predicate):
+        for p in doc.paragraphs:
+            if predicate(p):
+                return p
+        raise RuntimeError("paragraph not found")
+
+    p_contrib  = doc.paragraphs[25]
+    p_controls = doc.paragraphs[92]
+    p_mech4    = doc.paragraphs[142]
+    p_sim1     = doc.paragraphs[51]
+    p_sim2     = doc.paragraphs[52]
+    p_sim3     = doc.paragraphs[53]
+    p_fig1     = doc.paragraphs[59]
+    p_h3       = doc.paragraphs[50]
+    p_robust   = _find_para(lambda p: '（三）稳健性检验' in p.text)
+    p_concl    = _find_para(lambda p: p.text.strip().startswith('五、')
+                             and '研究结论' in p.text)
+
+    # Quick sanity checks
+    assert 'CPTPP' in p_mech4.text and '基础设施' in p_mech4.text
+    assert '数值模拟' in p_sim1.text
+    assert 'Eaton' in p_sim2.text or 'Melitz' in p_sim2.text
+    assert 'H3' in p_h3.text
+
     # (A) rewrite contributions
-    _replace_paragraph_text(doc.paragraphs[25], NEW_CONTRIB)
+    _replace_paragraph_text(p_contrib, NEW_CONTRIB)
 
     # (B) extend control variables paragraph
-    _append_paragraph_text(doc.paragraphs[92], CONTROLS_APPEND)
+    _append_paragraph_text(p_controls, CONTROLS_APPEND)
 
     # (C) replace 4.进一步分析 paragraph to extend mechanism discussion
-    p142 = doc.paragraphs[142]
-    assert 'CPTPP' in p142.text and '基础设施' in p142.text, \
-        f"unexpected para 142: {p142.text[:60]!r}"
-    _replace_paragraph_text(p142, NEW_PARA_142)
+    _replace_paragraph_text(p_mech4, NEW_PARA_142)
+
+    # (C.1) replace simulation paragraphs with calibrated text
+    _replace_paragraph_text(p_sim1, NEW_SIM_PARA_51)
+    _replace_paragraph_text(p_sim2, NEW_SIM_PARA_52)
+    _replace_paragraph_text(p_sim3, NEW_SIM_PARA_53)
+
+    # (C.2) replace the existing Figure 1 image with the new calibrated figure
+    fig_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                            'figure1_simulation.png')
+    if os.path.exists(fig_path):
+        _replace_image_in_paragraph(doc, p_fig1, fig_path)
+
+    # (C.3) insert theory→empirical bridge after H3 paragraph
+    bridge_elem = _build_paragraph(doc, BRIDGE_THEORY_TO_EMPIRICS, 'Normal')
+    p_h3._element.addnext(bridge_elem)
 
     # (D) Insert 表8 + leading paragraph at end of (二)主要结果, just before (三)稳健性检验.
-    # Anchor: paragraph 120 "（三）稳健性检验"
-    anchor_robust = doc.paragraphs[120]
-    assert '稳健性' in anchor_robust.text
-    _insert_block_before(anchor_robust._element, doc, [
+    _insert_block_before(p_robust._element, doc, [
         ('p', PARA_AFTER_TABLE3, 'Normal'),
         ('tbl', TABLE_8),
     ])
 
-    # (E) Insert 表12 right after the original 表7 caption + table.
-    # Anchor: original 五、研究结论 paragraph (which is now at the same position).
-    # But before inserting heterogeneity section we want 表12 placed inside
-    # 4.进一步分析, i.e., immediately after the closing footnote of 表7.
-    # The body still ends 表7 with its own footnote paragraph (if any) and then
-    # an empty paragraph. We insert 表12 right before 五、研究结论 first, then
-    # the (四)异质性分析 block before 表12, so the resulting order is:
-    #   ... 表7 (existing) ...  [表12 + note]  [（四）异质性 + 表9/10/11]  五、研究结论
-    # Wait — we want mechanism (表12) to be part of 4.进一步分析, BEFORE (四).
-    # So insert 表12 first, then (四) block, all before 五、研究结论.
-    target_conclusion = None
-    for p in doc.paragraphs:
-        if p.text.strip().startswith('五、') and '研究结论' in p.text:
-            target_conclusion = p
-            break
-    assert target_conclusion is not None
-    anchor = target_conclusion._element
+    # (E) Insert 表12 right after the original 表7 caption + table,
+    # then (四) 异质性分析 章节, all before 五、研究结论.
+    anchor = p_concl._element
 
     blocks = [
         # CPTPP 多渠道传导表（属于 4. 进一步分析 章节内的补充材料）

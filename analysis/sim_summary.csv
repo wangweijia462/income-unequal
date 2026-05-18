@@ -1,0 +1,6 @@
+metric,value
+sim_slope_dlnX_dtheta,3.172400137789444
+dml_theta_full_controls,2.951
+dml_se,1.2
+cptpp_to_dstoi,0.029
+cptpp_indirect_thru_dstoi,0.049
