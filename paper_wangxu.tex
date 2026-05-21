@@ -1,4 +1,8 @@
-﻿\documentclass[12pt]{article}
+﻿
+
+
+
+\documentclass[12pt]{article}
 
 % ============================================================================
 % AER-Style Preamble
@@ -77,17 +81,15 @@ The Strait of Hormuz carries roughly 20 percent of global petroleum trade throug
 
 We answer these questions with a four-region New Keynesian DSGE model calibrated to a Hormuz-blockade scenario triggered by regional military escalation. The four regions---Iran (the war site), the US--Israel bloc (the external-belligerent aggregate), China (the major oil-importing stabilizer), and the rest of the world (ROW)---are each governed by a standard New Keynesian three-equation system and linked through a global oil market, bilateral trade flows, and a financial contagion matrix. The US--Israel label denotes an aggregate military-demand and safe-haven block quantitatively dominated by the US economy, not a separate structural model of two distinct countries. Around this baseline, we vary six margins: an endogenous OPEC+ supply response, a five-region disaggregation of ROW into oil exporters and importers, Gulf-infrastructure escalation, pre-war news shocks, inflation-expectation de-anchoring, and fiscal debt dynamics. These extensions transform the paper from a single blockade counterfactual into a stress-test map of which institutional margins bind most tightly when the chokepoint shock is made progressively more realistic.
 
-The structural analysis delivers three quantitative results that sharpen the energy-security policy debate in ways reduced-form estimates cannot.
+The structural analysis delivers three sets of quantitative findings that cannot be recovered from reduced-form estimates. The baseline blockade raises global oil prices by 64.2 percent and generates a global welfare loss of 0.485 percentage points of permanent consumption. China's triple stabilization---strategic petroleum reserve releases, renewable-energy substitution, and manufacturing export expansion---reduces the oil-price peak by approximately five percentage points and saves 0.045 percentage points of global welfare, but a full OPEC+ spare-capacity response combined with China's instruments saves 0.183 percentage points and reduces the oil-price peak to 56.9 percent. The operative stabilizing margin is therefore spare physical production capacity acting directly on the missing-barrel supply gap, not demand-side reserve drawdowns. Disaggregating the rest-of-world block into net oil exporters and importers reveals that the aggregate ROW welfare figure conceals opposite-signed effects: exporters lose only 0.039 percentage points while importers bear a 0.786 percentage-point loss, a distributional gap of 0.578 percentage points hidden by the aggregate 0.617 figure, and policy prescriptions calibrated to the aggregate would systematically misattribute commodity windfall gains to exporters as evidence of general third-country resilience. Escalation intensity, inflation-expectation anchoring, and pre-existing fiscal space determine the tail: moderate Gulf-infrastructure damage raises the oil-price peak to 95.4 percent while severe damage raises it to 126.6 percent and global welfare losses to 0.731 percentage points. Pre-war anticipation redistributes losses intertemporally without materially changing their total, while successful diplomacy avoids 0.204 percentage points of global loss. Under severe expectation de-anchoring, aggressive Taylor-rule tightening worsens welfare by amplifying the output contraction without reducing the cost-push source of inflation, and the US--Israel bloc breaches the 130 percent debt-to-GDP sustainability threshold under every fiscal rule examined, indicating that pre-existing fiscal space rather than crisis-era activism is the operative constraint.
 
-\textit{First, oil-market stabilization operates through physical supply capacity, not demand-side activism.} The baseline blockade raises oil prices by 64.2 percent and produces a global welfare loss of 0.485 percentage points of permanent consumption. China's triple stabilization lowers the oil-price peak by about 5 percentage points and saves 0.045 percentage points of global welfare. A high OPEC+ supply response, by contrast, lowers the oil-price peak to 56.9 percent and saves 0.183 percentage points when combined with China's instruments. The operative stabilizing margin is therefore spare physical production capacity, not simply the size of strategic petroleum reserves.
+Four strands of prior work inform the analysis. The economics of war and conflict provides the foundational empirical anchor. Using a comprehensive dataset of armed conflicts since 1870, \citet{federle2026price} document that wars reduce war-site GDP by roughly 10 percent on average and that third-country spillovers flow primarily through bilateral trade exposure, with each percentage point of bilateral trade share generating approximately 0.5 percentage points of spillover output loss. Their reduced-form local projections identify these average effects cleanly but cannot decompose them into the energy-price, financial, and supply-chain components that activate in a chokepoint scenario, and the Hormuz case is precisely the outlier their cross-war average is not designed to capture: bilateral Iran--importer trade is far too small---at most 1.5 percent of China's imports---to account for the large third-country losses the model generates, which instead flow through the global oil-price channel activated by the chokepoint geometry. \citet{abadie2003economic} establish the synthetic-control methodology for conflict-cost estimation that informs the construction of our no-war counterfactual path; \citet{barro2006rare} provides the rare-disaster framework that motivates pricing tail-risk welfare losses through a discounted consumption-equivalent index rather than relying on local linear approximations around a steady state.
 
-\textit{Second, the aggregate ROW block conceals opposite-signed terms-of-trade effects.} Splitting ROW into oil exporters and oil importers leaves global welfare close to the baseline (0.478 percentage points), but the distribution changes sharply: exporters lose only 0.039 percentage points while importers lose 0.786 percentage points. The aggregate ROW welfare figure of 0.617 percentage points therefore masks a 0.578 percentage-point distributional gap. This distinction matters for policy design: prescriptions calibrated to the aggregate ROW response would misattribute commodity windfall gains for oil exporters as evidence of global resilience.
+The structural modeling of geopolitical and energy shocks constitutes the second strand. \citet{caldara2022measuring} construct a monthly index of geopolitical risk from automated newspaper text searches and use it to identify geopolitical risk shocks in vector autoregressions on U.S. and international data. Their central finding---that geopolitical risk shocks depress industrial production, employment, and stock returns while generating capital outflows from emerging economies toward safe havens, with financial-market transmission quantitatively dominating bilateral goods-trade linkages---motivates the central position of the financial contagion matrix in the present framework and directly disciplines the calibration of $\gamma_s$ and $\gamma_k$ in the financial conditions index~(\ref{eq:fci}). \citet{caldara2022measuring} further demonstrate that both geopolitical threats and geopolitical acts contribute independently to economic outcomes, a finding directly tested in the news-shock extension of Section~\ref{sec:news}, which separates the financial costs of anticipation from the physical costs of blockade. \citet{bodenstein2011oil} develop the two-country open-economy New Keynesian DSGE with oil that we extend from two to four regions; their calibration of short-run demand and supply price elasticities---$|\varepsilon_d| = 0.05$ and $\varepsilon_s = 0.10$---carries directly into our oil-price equation~(\ref{eq:oil_price}), and their analysis of asymmetric exporter--importer responses provides the structural rationale for the ROW disaggregation in Section~\ref{sec:row_split}. The extension from two to four regions matters substantively: the two-country structure forces Iran and the global oil market into the same region, obscuring the chokepoint mechanism, whereas a separate war-site region allows the simultaneous supply-destruction and revenue-loss dynamics to generate stagflation at their full empirical intensity while transmitting the oil-price shock to the remaining three regions.
 
-\textit{Third, escalation severity, expectation anchoring, and fiscal space define the tail risk.} Moderate Gulf-infrastructure escalation raises the oil-price peak to 95.4 percent; severe escalation raises it to 126.6 percent, lifting the global welfare loss to 0.731 percentage points. Anticipation front-loads financial stress but barely alters realized-war welfare losses (0.486 versus 0.482 percentage points for a surprise war), while successful diplomacy avoids 0.204 percentage points of global loss. Inflation-expectation de-anchoring generates large additional welfare costs when expectations become predominantly backward-looking, and the debt exercise shows that the US--Israel bloc breaches the 130 percent debt-to-GDP sustainability threshold under every fiscal rule. The binding second-round policy constraints are thus supply capacity, credible monetary anchoring, and pre-existing fiscal space.
+The energy economics of supply disruptions provides the quantitative discipline for the oil-market specification. \citet{hamilton1983oil} establishes the foundational regularity that oil supply disruptions cause recessions, and the time-series evidence in \citet{hamilton2009understanding} documents that crude oil demand is highly price-inelastic at acute-disruption horizons---approximately $-0.06$ over one year---while supply is equally unresponsive. These estimates rationalize the $|\varepsilon_d| = 0.05$ and $\varepsilon_s = 0.10$ values in equation~(\ref{eq:oil_price}) and explain why even a partial chokepoint blockade translates into a disproportionately large price spike: with an elasticity denominator of only 0.15, a 10 percent supply shortfall generates a price increase of roughly 67 percent before reserve releases and demand feedback. \citet{kilian2009not} introduces the identification refinement that the macroeconomic consequences of oil price increases depend on whether they originate from supply disruptions, global demand expansions, or precautionary demand; correctly distinguishing the source matters for monetary policy because a supply-driven increase generates simultaneous output contraction and cost-push inflation, making Taylor-rule tightening potentially counterproductive. This is precisely the configuration explored in Section~\ref{sec:deanchoring}. \citet{blanchard2007macroeconomic} document that oil shock effects have diminished since the 1980s due to reduced energy intensity, improved monetary credibility, and more flexible factor markets; their framework motivates the region-specific $\alpha_{e,i}$ parameters that generate heterogeneous pass-through in equations~(\ref{eq:nkpc}) and~(\ref{eq:is}), and the monetary-credibility dimension of the de-anchoring extension.
 
-The counterfactual analysis in Section~\ref{sec:robustness} examines six margins: OPEC+ supply response, ROW heterogeneity, escalation intensity, news shocks, expectation de-anchoring, and fiscal debt dynamics.
-
-Four strands of prior work inform our analysis. The first is the economics of war and conflict. \citet{federle2026price} document that wars reduce war-site GDP by roughly 10 percent on average and that third-country spillovers flow primarily through bilateral trade exposure. Reduced-form local projections identify these average magnitudes cleanly but cannot decompose them into energy-price, financial, and supply-chain components, nor can they answer policy counterfactuals. \citet{abadie2003economic} provide the foundational synthetic-control methodology for conflict-cost estimation; \citet{barro2006rare} establish the rare-disaster pricing framework that motivates our scenario approach. The second strand is DSGE modeling of geopolitical and oil-market shocks. \citet{caldara2022measuring} show that geopolitical risk shocks reduce investment and output through financial-market channels rather than goods-trade channels---the same transmission ordering our model confirms. \citet{bodenstein2011oil} develop the two-country open-economy DSGE with oil that we extend to four regions; their calibration of short-run price elasticities ($|\varepsilon_d| = 0.05$, $\varepsilon_s = 0.10$) carries directly into our oil-price equation~(\ref{eq:oil_price}). The third strand is the energy economics of oil-supply disruptions. \citet{hamilton1983oil} establishes that oil supply disruptions cause recessions; \citet{kilian2009not} identifies the critical distinction between supply- and demand-driven shocks; \citet{hamilton2009understanding} and \citet{blanchard2007macroeconomic} document that low short-run price elasticities and heterogeneous energy intensity amplify pass-through---features we capture through region-specific $\alpha_{e,i}$ parameters in the oil-price equation. The final strand concerns China's global stabilization role. \citet{zhang2020china} analyze China's SPR in a DSGE model and find that reserve releases effectively dampen oil-price volatility---the starting point our triple-channel model extends. \citet{helveston2019china} document that China's solar manufacturing generates global cost-reduction externalities, providing empirical support for the manufacturing stabilization channel. \citet{longstaff2011financial} and \citet{rey2015dilemma} furnish the empirical foundation for the financial contagion matrix.
+China's global stabilization role and the mechanics of financial contagion constitute the fourth strand. \citet{zhang2020china} develop a closed-economy DSGE model of China's strategic petroleum reserve and document that coordinated SPR releases reduce oil-price volatility: a release equivalent to 0.5 percent of global supply reduces the oil price by roughly three to five percentage points, consistent with the approximately five-percentage-point reduction estimated in the baseline. We extend their analysis by embedding the SPR in a four-region global framework that recovers the public-good externality of reserve policy accruing to all net-importing regions, and by adding the renewable substitution and manufacturing channels that reveal the SPR to be the capacity-constrained instrument while manufacturing remains unconstrained throughout the blockade window. \citet{helveston2019china} document that China's solar photovoltaic supply chain has reduced global module costs by 24 percent over the past decade through economies of scale and competitive specialization; the same mechanism applies to the manufacturing export channel in equation~(\ref{eq:mfg}), where industrial reorientation toward disrupted supply gaps generates disinflationary spillovers to trading partners proportional to their trade openness $\omega_i$. \citet{longstaff2011financial} demonstrate that sovereign credit risk transmits across borders through portfolio rebalancing and risk-appetite channels independently of bilateral trade or financial exposure, providing the empirical foundation for the off-diagonal entries of the financial linkage matrix~(\ref{eq:linkage_matrix}) and for the risk-aversion amplifier $\Gamma_t$ that intensifies contagion during capital flight from the war site. \citet{rey2015dilemma} documents that the global financial cycle drives co-movement in capital flows and credit conditions across economies with negligible direct bilateral links, undermining floating exchange rates as shock absorbers---a finding that motivates both China's FX intervention term in equation~(\ref{eq:rer}) and the partial capital-account insulation that differentiates China's financial transmission from the broader ROW block.
 
 Section~\ref{sec:facts} documents the stylized facts motivating the scenario. Sections~\ref{sec:model}--\ref{sec:calibration} present the model and calibration. Section~\ref{sec:results} reports baseline results. Section~\ref{sec:robustness} presents the six extensions. Section~\ref{sec:conclusion} draws policy implications.
 
@@ -104,45 +106,45 @@ The first fact is the physical concentration of oil transit. Figure~\ref{fig:cho
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{figures/facts_fig1_chokepoints.png}
 \caption{Major Global Oil Transit Chokepoints: Daily Volume (2022)}
 \label{fig:chokepoints}
+\includegraphics[width=0.85\textwidth]{figures/facts_fig1_chokepoints.png}
 \end{figure}
 
 The second fact is that the producers exposed to Hormuz are large and oil-dependent. Figure~\ref{fig:producers} documents both the global supply shares of Hormuz-routing producers and the oil-revenue dependence of their domestic economies. Saudi Arabia alone contributes 12 percent of global supply through the strait; Iraq, the UAE, Iran, and Kuwait contribute another 16 percent combined. Panel~B shows the fiscal stakes: oil revenues constitute 30--42 percent of GDP for most producers in the region, and oil accounts for 50--90 percent of their total exports. This concentration means that any scenario blocking Hormuz transit simultaneously constitutes a supply shock, a fiscal crisis, and a balance-of-payments event for multiple large economies.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{figures/facts_fig2_producers.png}
 \caption{Hormuz-Adjacent Producers: Global Supply Shares and Oil Dependence}
 \label{fig:producers}
+\includegraphics[width=\textwidth]{figures/facts_fig2_producers.png}
 \end{figure}
 
 Historical oil prices provide the third fact. Figure~\ref{fig:oilhistory} plots nominal Brent crude prices from 1970 to 2023 with seven conflict events annotated. The 1979 Iranian Revolution and the 1980 Iran--Iraq War together produced an oil price rise from \$3 to \$36 per barrel---a 12-fold increase over seven years. The 1990 Gulf War nearly doubled prices over a single quarter. Even the 2019 Hormuz tanker incidents---a far milder event involving intermittent harassment rather than blockade---generated a 15 percent price response within six weeks. The consistency of this pattern across episodes of very different intensities supports the use of oil price as the primary transmission channel in our DSGE model.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{figures/facts_fig3_oil_history.png}
 \caption{Brent Crude Oil Price and Middle East Conflict Episodes, 1970--2023}
 \label{fig:oilhistory}
+\includegraphics[width=\textwidth]{figures/facts_fig3_oil_history.png}
 \end{figure}
 
 Regional exposure is sharply asymmetric. Figure~\ref{fig:regionprofile} summarizes the economic profiles of the four regions in our model. Panel~A confirms that the four-region partition covers the global economy with minimal overlap: Iran (2 percent), US--Israel (28 percent), China (20 percent), and ROW (50 percent) together span global GDP. Panel~B reveals the asymmetric energy exposure: Iran is a net oil exporter (20 percent of GDP) while China and ROW are net importers (5 and 4 percent of GDP, respectively). This asymmetry---the same shock is simultaneously a revenue windfall for Iran's pre-war baseline and a cost push for oil importers---is what produces the distinct impulse-response profiles documented in Section~\ref{sec:results}. Panel~C shows that China's stabilization capacity substantially exceeds the US on all three margins: SPR cover (90 versus 60 days), installed renewable capacity (850 versus 295 GW), and manufacturing export share (14 versus 8.5 percent of global trade).
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{figures/facts_fig4_regional_profile.png}
 \caption{Economic Profiles of the Four Model Regions}
 \label{fig:regionprofile}
+\includegraphics[width=\textwidth]{figures/facts_fig4_regional_profile.png}
 \end{figure}
 
 The fifth fact is financial rather than physical. Figure~\ref{fig:spreadepisodes} plots sovereign spread deviations around four historical conflict episodes: the Iran--Iraq War (1980Q3), the Gulf War (1990Q3), the Iraq War (2003Q1), and the 2019 Hormuz tanker incidents (2019Q2). In every episode, sovereign spreads in the ROW aggregate (GDP-weighted Germany, France, UK, and Japan) rose substantially---averaging 30 percent of the Iran spread increase---despite minimal bilateral trade linkages with Iran or the Gulf. The speed of contagion (spreads move within one to two quarters of onset) and its persistence (elevated for four to eight quarters) are inconsistent with a pure trade-channel explanation and point to portfolio-rebalancing and risk-appetite channels as the primary transmission mechanism. These patterns motivate the $4 \times 4$ financial contagion matrix at the core of our model and the de-anchoring, news-shock, and debt exercises in Section~\ref{sec:robustness}.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.95\textwidth]{figures/facts_fig5_spread_episodes.png}
 \caption{Sovereign Spread Responses Around Middle East Conflict Episodes}
 \label{fig:spreadepisodes}
+\includegraphics[width=0.95\textwidth]{figures/facts_fig5_spread_episodes.png}
 \end{figure}
 
 Taken together, these five facts establish that the Strait of Hormuz is a uniquely concentrated global risk, that a blockade would simultaneously hit supply, fiscal, and financial channels, and that the financial contagion channel historically dominates the bilateral trade channel in spreading conflict costs to third countries. Our DSGE model is designed to quantify precisely these three mechanisms.
@@ -156,11 +158,7 @@ Taken together, these five facts establish that the Strait of Hormuz is a unique
 
 A Strait of Hormuz closure activates three analytically distinct transmission channels: a supply-cost channel operating through the global oil price, a demand-destruction channel comprising trade disruption and capital flight, and a financial contagion channel through which sovereign risk premia spread across borders. Capturing all three within a single quantitative framework requires a model that is simultaneously multi-regional, open-economy, and financially augmented. We build this model as a four-region New Keynesian DSGE in which regions are linked through a global oil market, bilateral trade flows, and a calibrated financial contagion matrix. Each region $i \in \{\text{Iran}, \text{US-Israel}, \text{China}, \text{ROW}\}$ is characterized by a representative household, a continuum of monopolistically competitive firms, and a central bank following a Taylor rule. Three modeling choices distinguish the framework from a standard open-economy New Keynesian model; each is motivated by direct empirical evidence from the energy and geopolitical-risk literatures.
 
-\begin{enumerate}[leftmargin=2em, itemsep=2pt, topsep=4pt]
-\item \textit{Chokepoint oil market.} Rather than treating oil as a symmetric bilateral trade flow, we model the Strait of Hormuz as a transit node through which 20 percent of global supply routes, so that a blockade disrupts all transiting producers simultaneously---not merely Iran's bilateral exports. This specification is necessary because the welfare costs of the scenario propagate primarily through the global oil-price channel, whose magnitude far exceeds what Iran's bilateral trade share alone would imply \citep{hamilton2009understanding}.
-\item \textit{Financial contagion matrix.} We augment the standard IS--PC--TR block with sovereign spreads, capital flows, and equity prices linked across regions by a $4 \times 4$ financial transmission matrix. This addition is motivated by \citet{caldara2022measuring}'s finding that geopolitical risk transmits primarily through financial markets rather than goods-trade networks, and the matrix is stress-tested in the news-shock, de-anchoring, and debt extensions.
-\item \textit{China's triple stabilization.} We model China's strategic petroleum reserve (SPR) releases, renewable-energy substitution, and manufacturing export expansion as three distinct policy instruments with different temporal profiles and binding capacity constraints. This disaggregation is necessary to identify which margin is operative---a question that a single composite stabilization parameter cannot answer, and that prior DSGE work on China's SPR \citep{zhang2020china} does not address.
-\end{enumerate}
+The framework departs from a standard open-economy New Keynesian model in three respects, each motivated by direct empirical evidence. Rather than treating oil as a symmetric bilateral trade flow, we model the Strait of Hormuz as a transit node through which 20 percent of global supply routes, so that a blockade simultaneously disrupts all producers routing through the strait---not merely Iran's bilateral exports. This chokepoint specification is essential because the welfare costs of the scenario propagate primarily through the global oil-price channel, whose magnitude far exceeds what Iran's 4 percent production share alone would imply \citep{hamilton2009understanding}; without it, the model would attribute the price spike entirely to Iran's bilateral supply share and understate the disruption by more than an order of magnitude. We also augment the standard three-equation block with a $4 \times 4$ financial transmission matrix linking sovereign spreads, capital flows, and equity prices across all four regions---an addition motivated by \citet{caldara2022measuring}'s evidence that geopolitical risk transmits primarily through financial markets rather than bilateral goods-trade networks, and varied systematically through the news-shock, de-anchoring, and debt extensions. Finally, we disaggregate China's stabilization capacity into three distinct instruments---strategic petroleum reserve releases, renewable-energy substitution, and manufacturing export expansion---with different temporal profiles and binding capacity constraints. Prior DSGE analyses of China's energy policy \citep{zhang2020china} treat stabilization as a single composite instrument and cannot therefore identify which margin is binding at each phase of a sustained disruption; that identification is the central policy question the present paper addresses.
 
 \subsection{Regional Equilibrium}
 
@@ -222,9 +220,14 @@ Here $s^{\text{Hormuz}} = 0.20$ is the Hormuz chokepoint's share of global petro
 
 The oil price is determined by supply-demand balance. Consistent with the energy economics literature on short-run inelasticity, both demand and supply respond sluggishly to price changes:
 \begin{equation}
-\Delta p^{\text{oil},*}_t = \max\left\{\frac{\Delta S_t - \text{SPR}^{\text{China}}_t - \text{SPR}^{\text{US}}_t - \text{OPEC}_t + \Delta D_t}{|\varepsilon_d| + \varepsilon_s},0\right\}, 
-\qquad
-\Delta p^{\text{oil}}_t = 0.15\,\Delta p^{\text{oil}}_{t-1}+0.85\,\Delta p^{\text{oil},*}_t
+\begin{aligned}
+\Delta p^{\text{oil},*}_t
+&= \max\left\{
+\frac{\Delta S_t - \text{SPR}^{\text{China}}_t - \text{SPR}^{\text{US}}_t - \text{OPEC}_t + \Delta D_t}
+{|\varepsilon_d| + \varepsilon_s},0\right\}, \\
+\Delta p^{\text{oil}}_t
+&= 0.15\,\Delta p^{\text{oil}}_{t-1}+0.85\,\Delta p^{\text{oil},*}_t.
+\end{aligned}
 \label{eq:oil_price}
 \end{equation}
 Here $\varepsilon_d = -0.05$ and $\varepsilon_s = 0.10$ are short-run demand and supply price elasticities \citep{hamilton2009understanding}; their sum in the denominator quantifies the low price-responsiveness of the global oil market over the horizon of an acute supply disruption. $\text{SPR}^{\text{China}}_t$ and $\text{SPR}^{\text{US}}_t$ are strategic reserve releases; $\text{OPEC}_t$ is the endogenous spare-capacity response defined in Section~\ref{sec:opec}; and $\Delta D_t = -0.08\min\{\max(\bar{y}_{t-1},-0.5),0\}$ captures demand destruction that feeds back from lagged global output. In the baseline, $\text{OPEC}_t = 0$; the OPEC+ extension activates it endogenously to study the interaction between supply-side spare capacity and other stabilization instruments.
@@ -358,10 +361,12 @@ Gulf-infrastructure escalation adds a temporary additional supply-loss term to t
 
 Pre-war news allows a four-quarter anticipation phase in which financial variables pre-adjust to the conflict probability $p^{\text{news}}=0.6$. With $a_t=(t+1)/4$ for $t=-4,\ldots,-1$ indexing the announcement ramp, the pre-adjustment paths are:
 \begin{equation}
-s^{\text{pre}}_{\text{Iran},t}=0.010\,p^{\text{news}}a_t,\quad
-s^{\text{pre}}_{\text{ROW},t}=0.002\,p^{\text{news}}a_t,\quad
-k^{\text{pre}}_{\text{Iran},t}=-0.020\,p^{\text{news}}a_t,\quad
-k^{\text{pre}}_{\text{US},t}=0.005\,p^{\text{news}}a_t.
+\begin{aligned}
+s^{\text{pre}}_{\text{Iran},t} &= 0.010\,p^{\text{news}}a_t, &
+s^{\text{pre}}_{\text{ROW},t} &= 0.002\,p^{\text{news}}a_t, \\
+k^{\text{pre}}_{\text{Iran},t} &= -0.020\,p^{\text{news}}a_t, &
+k^{\text{pre}}_{\text{US},t} &= 0.005\,p^{\text{news}}a_t.
+\end{aligned}
 \label{eq:news}
 \end{equation}
 This structure permits a clean comparison between a surprise war ($p^{\text{news}}=0$), an anticipated war ($p^{\text{news}}=0.6$), and a false alarm in which diplomacy succeeds and the physical shock never arrives.
@@ -516,9 +521,9 @@ Figure~\ref{fig:impulse} shows the core macro-financial responses under the base
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{figures/fig1_impulse_responses.png}
 \caption{Impulse Responses to War Onset}
 \label{fig:impulse}
+\includegraphics[width=\textwidth]{figures/fig1_impulse_responses.png}
 \end{figure}
 
 The war-site response is textbook stagflation. Iran's output gap reaches $-34.10$ percentage points at trough as physical capital destruction, trade disruption, and lost oil-export revenue simultaneously compress real activity, while the oil-price shock and the destruction term in equation~(\ref{eq:supply_shock}) combine to push domestic inflation up by 7.76 percentage points. The shock does not remain confined to the war site. In the US--Israel bloc, military spending provides a Keynesian demand cushion, but higher real interest rates, energy cost pass-through, and financial contagion still produce a $-3.50$ percentage-point output trough and a 0.14 percentage-point loss index---negative welfare despite positive measured GDP, because defense spending substitutes for private consumption. China's output trough is $-4.75$ percentage points with stabilization active and $-4.87$ without it; the absolute difference is small, but the welfare saving accrues primarily to trading partners through the oil-price and supply-chain channels rather than to China's domestic economy. The largest non-war-site output response occurs in ROW, where the trough reaches $-6.28$ percentage points and the loss index is 0.617 percentage points. Section~\ref{sec:row_split} shows that this aggregate conceals a sharp distributional divide between nearly insulated oil exporters and far more exposed oil importers.
@@ -527,9 +532,9 @@ The oil-price response peaks in the first two quarters of the blockade and then 
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.9\textwidth]{figures/fig2_oil_price.png}
 \caption{Global Oil Market Response}
 \label{fig:oilbaseline}
+\includegraphics[width=0.9\textwidth]{figures/fig2_oil_price.png}
 \end{figure}
 
 \begin{table}[H]
@@ -565,9 +570,9 @@ Figure~\ref{fig:china} decomposes the China stabilization effect by instrument. 
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{figures/fig3_china_stabilization.png}
 \caption{China's Triple Stabilization Mechanism}
 \label{fig:china}
+\includegraphics[width=\textwidth]{figures/fig3_china_stabilization.png}
 \end{figure}
 
 \begin{table}[H]
@@ -602,9 +607,9 @@ Consumption-equivalent welfare loss indices, constructed following \citet{lucas1
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.8\textwidth]{figures/fig5_regional_welfare.png}
 \caption{Consumption-Equivalent Loss Indices}
 \label{fig:welfare}
+\includegraphics[width=0.8\textwidth]{figures/fig5_regional_welfare.png}
 \end{figure}
 
 China's stabilization reduces welfare losses in every region but is not large enough to alter the ranking of vulnerability: Iran remains the war-site tail, ROW remains the dominant third-country exposure, and China bears less than ROW despite its oil-import dependence. The six extensions that follow examine which additional institutional margins---supply spare capacity, regional heterogeneity, escalation intensity, anticipation, expectation anchoring, and fiscal space---can meaningfully shift these welfare outcomes.
@@ -627,16 +632,16 @@ Spare OPEC+ production capacity provides the cleanest comparison with China's st
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth,trim=0 45 0 0,clip]{figures/s1_fig1_opec_paths.png}
 \caption{OPEC+ Response and Oil-Price Paths}
 \label{fig:opec_paths}
+\includegraphics[width=\textwidth]{figures/s1_fig1_opec_paths.png}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth,trim=0 45 0 0,clip]{figures/s1_fig3_opec_decomp.png}
-\caption{OPEC+ Supply Decomposition}
+\caption{OPEC+ Welfare and Oil-Price Decomposition}
 \label{fig:opec_decomp}
+\includegraphics[width=\textwidth]{figures/s1_fig3_opec_decomp.png}
 \end{figure}
 
 \begin{table}[H]
@@ -672,16 +677,16 @@ Disaggregating the ROW block into net oil exporters (ROW-X) and net oil importer
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{figures/s2_fig1_row_split_paths.png}
 \caption{ROW Heterogeneity: Exporters versus Importers}
 \label{fig:row_split_paths}
+\includegraphics[width=\textwidth]{figures/s2_fig1_row_split_paths.png}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.95\textwidth]{figures/s2_fig3_row_welfare.png}
 \caption{Welfare Distribution after ROW Disaggregation}
 \label{fig:row_welfare}
+\includegraphics[width=0.95\textwidth]{figures/s2_fig3_row_welfare.png}
 \end{figure}
 
 \begin{table}[H]
@@ -704,7 +709,7 @@ Global & $+0.4781$pp \\
 \end{tabular}
 \begin{tablenotes}[flushleft]
 \small
-\item \textit{Notes:} The aggregate four-region ROW welfare loss is 0.6165pp; the exporter-importer masking gap is 0.5776pp.
+\item[] \raggedright \textit{Notes:} The aggregate four-region ROW welfare loss is 0.6165pp; the exporter-importer masking gap is 0.5776pp.
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
@@ -718,16 +723,16 @@ Gulf-infrastructure escalation extends the scenario to include deliberate strike
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{figures/s3_fig1_escalation_paths.png}
-\caption{Escalation Paths}
+\caption{Oil-Price Paths under Escalation Scenarios}
 \label{fig:escalation_paths}
+\includegraphics[width=\textwidth]{figures/s3_fig1_escalation_paths.png}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.95\textwidth]{figures/s3_fig2_escalation_frontier.png}
 \caption{Oil-Price and Welfare Frontier under Escalation}
 \label{fig:escalation_frontier}
+\includegraphics[width=0.95\textwidth]{figures/s3_fig2_escalation_frontier.png}
 \end{figure}
 
 \begin{table}[H]
@@ -761,16 +766,16 @@ Pre-war news allows financial variables to move before the physical shock arrive
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{figures/s4_fig1_news_paths.png}
-\caption{Anticipated War versus Surprise War}
+\caption{Sovereign Spread Paths: Anticipated versus Surprise War}
 \label{fig:news_paths}
+\includegraphics[width=\textwidth]{figures/s4_fig1_news_paths.png}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{figures/s4_fig3_news_diplomacy.png}
-\caption{Welfare Value of Diplomacy}
+\caption{Welfare Outcomes and the Value of Diplomacy}
 \label{fig:news_diplomacy}
+\includegraphics[width=0.85\textwidth]{figures/s4_fig3_news_diplomacy.png}
 \end{figure}
 
 \begin{table}[H]
@@ -804,16 +809,16 @@ Expectation de-anchoring is modeled through the backward-looking weight $\lambda
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{figures/s5_fig1_deanchoring_paths.png}
 \caption{Inflation and Output under Expectation De-anchoring}
 \label{fig:deanchoring_paths}
+\includegraphics[width=\textwidth]{figures/s5_fig1_deanchoring_paths.png}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.8\textwidth]{figures/s5_fig2_deanchoring_heatmap.png}
-\caption{Welfare Surface: Expectations and Monetary Policy}
+\caption{Welfare Surface: Backward-Looking Weight and Taylor-Rule Intensity}
 \label{fig:deanchoring_heatmap}
+\includegraphics[width=0.8\textwidth]{figures/s5_fig2_deanchoring_heatmap.png}
 \end{figure}
 
 The welfare surface is non-monotone in monetary aggression. Under fully anchored expectations ($\lambda=0.20$), varying $\phi_\pi$ across the three Taylor-rule intensities moves global welfare by less than 0.05 percentage points---monetary activism is nearly irrelevant when credibility is intact. Under severe de-anchoring ($\lambda=0.90$), the hawkish rule ($\phi_\pi=2.5$) produces a 1.6711 percentage-point global welfare loss while the dovish rule ($\phi_\pi=1.0$) produces only 0.3872 percentage points. The maximum de-anchoring cost reaches 1.0996 percentage points in the hawkish column. The explanation is that in an energy supply shock, aggressive rate increases depress output without reducing the cost-push source of inflation; when expectations are backward-looking, this policy configuration amplifies both the output contraction and the inflation spiral rather than attenuating either. Credibility---anchoring $\lambda$ near zero---dominates mechanical Taylor-rule activism as a policy instrument in this environment.
@@ -821,20 +826,20 @@ The welfare surface is non-monotone in monetary aggression. Under fully anchored
 \subsection{Fiscal Sustainability and Debt Dynamics}
 \label{sec:debt}
 
-The fiscal exercise examines how different budgetary responses interact with the war-driven sovereign spread widening. Three rules are compared against the 130 percent debt-to-GDP sustainability threshold: passive automatic stabilizers, discretionary austerity triggered when the debt ratio exceeds the threshold, and targeted fiscal stimulus when the output gap turns negative. The exercise identifies whether fiscal activism can offset the demand contraction, and whether any rule can prevent debt sustainability from binding.
+The fiscal exercise examines how different budgetary responses interact with war-driven sovereign spread widening. We compare three rules against the 130 percent debt-to-GDP sustainability threshold: passive automatic stabilizers, discretionary austerity triggered when the debt ratio exceeds the threshold, and targeted fiscal stimulus when the output gap turns negative. The exercise identifies whether fiscal activism can offset the demand contraction, and whether any rule can prevent debt sustainability from binding.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{figures/s6_fig1_debt_paths.png}
 \caption{Debt-to-GDP Paths under Fiscal Rules}
 \label{fig:debt_paths}
+\includegraphics[width=\textwidth]{figures/s6_fig1_debt_paths.png}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.9\textwidth]{figures/s6_fig3_debt_fiscal_tradeoff.png}
-\caption{Fiscal Welfare-Debt Tradeoff}
+\caption{Fiscal Welfare--Debt Tradeoff}
 \label{fig:debt_tradeoff}
+\includegraphics[width=0.9\textwidth]{figures/s6_fig3_debt_fiscal_tradeoff.png}
 \end{figure}
 
 \begin{table}[H]
@@ -994,4 +999,3 @@ Financial contagion operates through:
 \end{equation}
 
 \end{document}
-
